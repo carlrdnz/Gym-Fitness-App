@@ -74,7 +74,18 @@
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav><!-- .navbar -->
 
+      {% if not request.user.is_authenticated %}
+
       <a href="/signup" class="get-started-btn scrollto">SIGN UP</a>
+      {% else %}
+      <nav id="navbar" class="navbar order-last order-lg-0">
+        <ul>
+          <li><a class="nav-link scrollto" href="/logout">Logout</a></li>
+        </ul>
+      </nav>
+      <a href="/" class="get-started-btn scrollto">Welcome</a>
+
+      {% endif %}
 
     </div>
   </header><!-- End Header -->
