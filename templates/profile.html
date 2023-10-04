@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% block title %}
+Profile
+{% endblock title %}
+{% block head%}
+
+<h1>Enrollment Details</h1>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-6">
+            {% for message in messages %}
+                <div class="alert alert-{{message.tags}} alert-dismissable fade show" role="alert">
+                    <strong></strong>{{message}}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-laabel="Close"></button>
+                </div>
+            {% endfor %}
+
+            {% comment %}Contact Us Code{% endcomment %}
+
+            {% for post in posts %}
+            <ul class="list-group">
+                <li class="list-group-item bg-dark text-white"><h5>Name : {{post.fullname}}</h5></li>
+                <li class="list-group-item bg-dark text-white"><h5>Email : {{post.email}}</h5></li>
+                <li class="list-group-item bg-dark text-white"><h5>Gender : {{post.gender}}</h5></li>
+                <li class="list-group-item bg-dark text-white"><h5>Phone : {{post.phonenumber}}</h5></li>
+                <li class="list-group-item bg-dark text-white"><h5>Date of Birth : {{post.birthdate}}</h5></li>
+                <li class="list-group-item bg-dark text-white"><h5>Membership Plan : {{post.membership}}</h5></li>
+                <li class="list-group-item bg-dark text-white"><h5>Trainer : {{post.trainer}}</h5></li>
+                <li class="list-group-item bg-dark text-white"><h5>Address : {{post.address}}</h5></li>
+                <li class="list-group-item bg-dark text-white"><h5>Payment Status : {{post.paymentStatus}}</h5></li>
+                <li class="list-group-item bg-dark text-white"><h5>Joining Date : {{post.timestamp}}</h5></li>
+
+            </ul>
+            {% endfor %}
+        </div>
+        <div class="col-md-3"></div>
+    </div>
+</div>
+
+{% endblock head%}

@@ -18,14 +18,14 @@ Enrollment for the Gym
             {% endfor %}
 
             {% comment %}Contact Us Code{% endcomment %}
-            <form action="" method="post"> {% csrf_token %}
+            <form action="join" method="post"> {% csrf_token %}
 
                 <div class="form-group">
                     <input type="text" class="form-control" name="fullname" placeholder="Enter Your Full Name" required>
                 </div>
 
                 <div class="form-group">
-                    <input type="email" class="form-control mt-2" name="email" value="{{user.email}}" placeholder="Enter Your Email" required>
+                    <input type="email" class="form-control mt-2" name="email" value="{{user.email}}" placeholder="Enter Your Email" readonly required>
                 </div>
 
                 <div class="form-group">
@@ -37,7 +37,7 @@ Enrollment for the Gym
                 </div>
 
                 <div class="form-group">
-                    <input type="number" class="form-control mt-2" name="phonenumber" placeholder="Enter Your Number" required>
+                    <input type="number" class="form-control mt-2" name="phonenumber" value="{{user.username}}" placeholder="Enter Your Number" readonly required>
                 </div>
 
                 <div class="form-group">
@@ -45,16 +45,16 @@ Enrollment for the Gym
                 </div>
 
                 <div class="form-group">
-                    <select class="form-control mt-2" name="membership" id="">
+                    <select class="form-control mt-2" name="member" id="member">
                         <option selected>Select Membership Plan</option>
                             {% for p in Membership %}
-                        <option value="{{p.plan}}">{{p.plan}} - ₱{{p.price}}</option>
+                        <option value="{{p.plan}} - {{p.price}}">{{p.plan}} - ₱{{p.price}}</option>
                             {% endfor %}
                     </select>
                 </div>
 
                 <div class="form-group">
-                    <select class="form-control mt-2" name="membership" id="">
+                    <select class="form-control mt-2" name="trainer" id="trainer">
                         <option selected>Select Trainer</option>
                             {% for p in SelectTrainer %}
                         <option value="{{p.name}}">{{p.name}}</option>
