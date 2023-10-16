@@ -429,13 +429,13 @@ h6 {
 /*--------------------------------------------------------------
 # Hero Section
 --------------------------------------------------------------*/
-#hero {
+/* #hero {
   width: 100%;
   height: 100vh;
-  background: url("../img/hero-bg.jpg") top center;
+  background: url("../img/gym-video.mp4") top center;
   background-size: cover;
   position: relative;
-}
+} */
 
 #hero {
   width: 100%;
@@ -448,12 +448,13 @@ h6 {
   position: absolute;
   top: 50%;
   left: 50%;
-  min-width: 100%;
-  min-height: 100%;
+  width: 100%;
+  height: 100%;
   width: auto;
   height: auto;
   z-index: -1;
   transform: translateX(-50%) translateY(-50%);
+  opacity: 0.7;
 }
 #hero::before {
   content: "";
@@ -1169,6 +1170,14 @@ section {
     width: 80%;
   }
 }
+
+/* Profile */
+.profile {
+  background: url("../img/hero-bg.jpg") top center;
+  padding: 60px 0;
+}
+
+
 
 /*--------------------------------------------------------------
 # Team

@@ -64,8 +64,7 @@
             <ul>
               <li><a href="/join">Enroll</a></li>
 
-              <li><a href="#">Workouts</a></li>
-              <li><a href="#">Tracker</a></li>
+              <li><a href="/attendance">Attendance</a></li>
               <li><a href="/profile">View Profile</a></li>
             </ul>
           </li>
@@ -74,7 +73,18 @@
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav><!-- .navbar -->
 
+      {% if not request.user.is_authenticated %}
+
       <a href="/signup" class="get-started-btn scrollto">SIGN UP</a>
+      {% else %}
+      <nav id="navbar" class="navbar order-last order-lg-0">
+        <ul>
+          <li><a class="nav-link scrollto" href="/logout">Logout</a></li>
+        </ul>
+      </nav>
+      <a href="/" class="get-started-btn scrollto">Welcome</a>
+
+      {% endif %}
 
     </div>
   </header><!-- End Header -->
@@ -82,6 +92,10 @@
   <!-- ======= Hero Section ======= -->
   <section id="hero" class="d-flex align-items-center justify-content-center">
     <div class="container" data-aos="fade-up">
+        <video autoplay muted loop id="video-bg">
+          <source src="{% static 'assets/img/gym-video.mp4' %}" type="video/mp4">
+        </video>
+
 
       <div class="row justify-content-center" data-aos="fade-up" data-aos-delay="150">
         <div class="col-xl-6 col-lg-8">

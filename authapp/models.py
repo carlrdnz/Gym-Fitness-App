@@ -47,3 +47,15 @@ class MembershipPlan(models.Model):
 
     def __int__(self):
         return self.id
+    
+
+class Attendance(models.Model):
+    selectdate=models.DateTimeField(auto_now_add=True, blank=True)
+    phonenumber=models.CharField(max_length=11)
+    login=models.CharField(max_length=200)
+    logout=models.CharField(max_length=200)
+    selectworkout=models.CharField(max_length=200)
+    trainer=models.CharField(max_length=200)
+
+    def __int__(self):
+        return self.id
