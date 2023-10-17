@@ -123,11 +123,12 @@
                 <div class="col-lg-6">
                     <div class="card mb-4">
                         <div class="card-body text-center">
-                            <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp" alt="avatar"
-                            class="rounded-circle img-fluid" style="width: 150px;">
-                            <h5 class="my-3">{{post.fullname}}</h5>
-                            <p class="text-muted mb-1">{{post.phonenumber}}</p>
-                            <p class="text-muted mb-4">{{post.address}}</p>
+                            <img id="profilePicture" src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp" alt="avatar"
+                                class="rounded-circle img-fluid" style="width: 150px; height: 150px; cursor: pointer;">
+                                <input type="file" accept="image/*" id="profilePictureInput" class="d-none">
+                            <h5 id="fullnameDisplay" class="my-3">{{post.fullname}}</h5>
+                            <p id="phonenumberDisplay" class="text-muted mb-1">{{post.phonenumber}}</p>
+                            <p id="addressDisplay" class="text-muted mb-4">{{post.address}}</p>
                             <div class="d-flex justify-content-center mb-2">
                                 <button type="button" class="btn btn-primary" id="editProfileBtn">Edit</button>
                                 <button type="button" class="btn btn-success d-none" id="saveProfileBtn">Save</button>
@@ -321,6 +322,7 @@
   <!-- Template Main JS File -->
   <script src="static/assets/js/main.js"></script>
   <script src="static/assets/js/editForm.js"></script>
+  <script src="static/assets/js/profileChange.js"></script>
 
   <script>
     window.addEventListener("scroll", function() {

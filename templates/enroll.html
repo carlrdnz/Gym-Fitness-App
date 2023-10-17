@@ -16,6 +16,10 @@ Enrollment for the Gym
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-laabel="Close"></button>
                 </div>
             {% endfor %}
+            
+            {% if user_already_enrolled %}
+                <p>You are already enrolled.</p>
+            {% else %}
 
             {% comment %}Contact Us Code{% endcomment %}
             <form action="join" method="post"> {% csrf_token %}
@@ -75,6 +79,7 @@ Enrollment for the Gym
                     <button class="btn btn-light btn-custom" type="submit">Enroll</button>
                 </div>
             </form>
+            {% endif %}
 
             
         </div>
