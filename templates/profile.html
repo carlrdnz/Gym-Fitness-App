@@ -119,6 +119,12 @@
                 <p class="text-white">View Profile</p>
             </div>
             <div class="row">
+                {% for message in messages %}
+                <div class="alert alert-{{message.tags}} alert-dismissable fade show" role="alert">
+                    <strong></strong>{{message}}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-laabel="Close"></button>
+                </div>
+                {% endfor %}
                 {% for post in posts %}
                 <div class="col-lg-6">
                     <div class="card mb-4">

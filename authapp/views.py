@@ -13,33 +13,49 @@ def Home(request):
 
 def attendance(request):
     if not request.user.is_authenticated:
-        messages.warning(request, "Please Login and Try Again")
+        messages.warning(request, "You must be signed up first")
         return redirect('/login')
-    SelectTrainer=Trainer.objects.all()
-    context={"SelectTrainer":SelectTrainer}
-    if request.method=="POST":
-        phonenumber=request.POST.get('phonenumber')
-        login=request.POST.get('logintime')
-        logout=request.POST.get('logouttime')
-        selectworkout=request.POST.get('workout')
-        trainer=request.POST.get('trainer')
+    user_phone = request.user.username  # Get the user's phone number
+    try:
+        enrollment = Enrollment.objects.get(phonenumber=user_phone)
+        # If the user is enrolled, they can access the attendance view
+        SelectTrainer = Trainer.objects.all()
+        context = {"SelectTrainer": SelectTrainer}
+        if request.method == "POST":
+            phonenumber = user_phone  # Use the authenticated user's phone number
+            login = request.POST.get('logintime')
+            logout = request.POST.get('logouttime')
+            selectworkout = request.POST.get('workout')
+            trainer = request.POST.get('trainer')
 
-        query=Attendance(phonenumber=phonenumber, login=login, logout=logout, selectworkout=selectworkout, trainer=trainer)
-        query.save()
-        messages.warning(request, "Attendance Recorded")
-        return redirect('/attendance')
-    return render(request,"attendance.html", context)
+            query = Attendance(phonenumber=phonenumber, login=login, logout=logout, selectworkout=selectworkout, trainer=trainer)
+            query.save()
+            messages.success(request, "Attendance Recorded")
+            return redirect('/attendance')
+        return render(request, "attendance.html", context)
+    except Enrollment.DoesNotExist:
+        # If the user is not enrolled, show a message and redirect them
+        messages.warning(request, "You must be enrolled to access the attendance page.")
+        return redirect('/join')
+
 
 
 def profile(request):
     if not request.user.is_authenticated:
-        messages.warning(request,"You must be Signed Up First")
+        messages.warning(request, "You must be signed up first")
         return redirect('/login')
-    user_phone=request.user
-    posts=Enrollment.objects.filter(phonenumber=user_phone)
-    attendance=Attendance.objects.filter(phonenumber=user_phone)
-    context={"posts":posts,"attendance":attendance}
-    return render(request,"profile.html",context)
+    user_phone = request.user.username  # Get the user's phone number
+    try:
+        enrollment = Enrollment.objects.get(phonenumber=user_phone)
+        # If the user is enrolled, they can access the profile view
+        posts = Enrollment.objects.filter(phonenumber=user_phone)
+        attendance = Attendance.objects.filter(phonenumber=user_phone)
+        context = {"posts": posts, "attendance": attendance}
+        return render(request, "profile.html", context)
+    except Enrollment.DoesNotExist:
+        # If the user is not enrolled, show a message and redirect them
+        messages.warning(request, "You must be enrolled to access the profile page.")
+        return redirect('/join')
 
 
 def signup(request):
@@ -127,6 +143,7 @@ def enroll(request):
 
     # Check if the user is already enrolled
     if Enrollment.objects.filter(phonenumber=user_phone).exists():
+        messages.success(request, "You are already Enrolled")
         return redirect('/profile')  # Redirect to the profile page if already enrolled
 
     Membership = MembershipPlan.objects.all()
